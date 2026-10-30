@@ -48,8 +48,17 @@
     .music-player .vol-wrap{display:flex;align-items:center;gap:6px}
     .music-player input[type=range]{width:72px;height:4px;accent-color:var(--blue);cursor:pointer}
     .music-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    .pricing-cta{display:flex;justify-content:center;margin-top:32px}
+    .tally-modal{position:fixed;inset:0;background:rgba(2,5,10,.94);display:none;align-items:center;justify-content:center;padding:20px;z-index:60;backdrop-filter:blur(8px)}
+    .tally-modal.open{display:flex}
+    .tally-content{position:relative;width:min(720px,96vw);height:min(860px,92vh);background:linear-gradient(145deg,#0d1422,#070b12);border:1px solid rgba(88,145,245,.45);box-shadow:0 0 60px rgba(35,100,220,.22);overflow:hidden;display:flex;flex-direction:column}
+    .tally-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(76,139,255,.25);flex-shrink:0}
+    .tally-header span{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice)}
+    .tally-close{border:1px solid #657da3;background:#0b1424;color:white;width:40px;height:40px;font-size:1.35rem;cursor:pointer;transition:.2s;flex-shrink:0}
+    .tally-close:hover{border-color:var(--blue2);background:#122038}
+    .tally-content iframe{flex:1;width:100%;border:0;min-height:0;background:#0b101b}
     @media(max-width:980px){.pricing{grid-template-columns:repeat(2,1fr)}.pricing .price-card.highlight{grid-column:span 2}}
-    @media(max-width:760px){.wrap{width:min(100% - 30px,var(--max))}.nav{height:70px}.navlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(8,13,22,.98);border-bottom:1px solid var(--line);padding:12px 0;z-index:40;box-shadow:0 12px 32px rgba(0,0,0,.5)}.navlinks.open{display:flex}.navlinks a{padding:14px 22px;border-bottom:1px solid rgba(76,139,255,.12)}.navlinks a:last-child{border-bottom:none}.menu-toggle{display:flex}.brand{font-size:1.8rem}.pricing{grid-template-columns:1fr}.pricing .price-card.highlight{grid-column:auto}.music-player{bottom:12px;right:12px;padding:8px 10px;gap:8px}.music-label{display:none}.music-player input[type=range]{width:56px}.hero{grid-template-columns:1fr;padding:62px 0 55px;gap:42px;min-height:0}.hero h1{font-size:clamp(4rem,18vw,6rem)}.profile-frame{width:min(88%,420px);margin:0 auto}.section{padding:58px 0}.section-head{display:block}.section-head p{margin-top:13px}.work-grid{grid-template-columns:1fr}.work-card.feature{grid-column:auto}.work-card.feature img{aspect-ratio:16/9}.about,.pricing{grid-template-columns:1fr}.contact-card{display:block;padding:28px}.contact-actions{margin-top:22px;flex-direction:column}.contact-channel{min-width:0;width:100%}.footer{display:block}.footer span{display:block;margin-top:6px}.float-tag{right:-4px;bottom:7%;font-size:.83rem}.gallery-content{padding:20px 16px 24px}.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.gallery-title{font-size:1.4rem}}
+    @media(max-width:760px){.wrap{width:min(100% - 30px,var(--max))}.nav{height:70px}.navlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(8,13,22,.98);border-bottom:1px solid var(--line);padding:12px 0;z-index:40;box-shadow:0 12px 32px rgba(0,0,0,.5)}.navlinks.open{display:flex}.navlinks a{padding:14px 22px;border-bottom:1px solid rgba(76,139,255,.12)}.navlinks a:last-child{border-bottom:none}.menu-toggle{display:flex}.brand{font-size:1.8rem}.pricing{grid-template-columns:1fr}.pricing .price-card.highlight{grid-column:auto}.music-player{bottom:12px;right:12px;padding:8px 10px;gap:8px}.music-label{display:none}.music-player input[type=range]{width:56px}.hero{grid-template-columns:1fr;padding:62px 0 55px;gap:42px;min-height:0}.hero h1{font-size:clamp(4rem,18vw,6rem)}.profile-frame{width:min(88%,420px);margin:0 auto}.section{padding:58px 0}.section-head{display:block}.section-head p{margin-top:13px}.work-grid{grid-template-columns:1fr}.work-card.feature{grid-column:auto}.work-card.feature img{aspect-ratio:16/9}.about,.pricing{grid-template-columns:1fr}.contact-card{display:block;padding:28px}.contact-actions{margin-top:22px;flex-direction:column}.contact-channel{min-width:0;width:100%}.footer{display:block}.footer span{display:block;margin-top:6px}.float-tag{right:-4px;bottom:7%;font-size:.83rem}.gallery-content{padding:20px 16px 24px}.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.gallery-title{font-size:1.4rem}.tally-modal{padding:0}.tally-content{width:100%;height:100%;max-height:100%;border-radius:0;border-left:0;border-right:0}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
   </style>
 </head>
@@ -94,7 +103,7 @@
     </section>
 
     <section class="section" id="pricing">
-      <div class="section-head"><div><div class="kicker">Simple, transparent pricing</div><h2>CHOOSE YOUR<br>THUMBNAIL PACK.</h2></div><p>Pick the option that fits your content. Click a plan to start your order on Discord.</p></div>
+      <div class="section-head"><div><div class="kicker">Simple, transparent pricing</div><h2>CHOOSE YOUR<br>THUMBNAIL PACK.</h2></div><p>Pick the package that fits your content. Choose your plan in the order form when you are ready.</p></div>
       <div class="pricing">
         <div class="price-card">
           <div class="price-label">Single order</div>
@@ -102,7 +111,6 @@
           <div class="price">US $10 <small>/ thumbnail</small></div>
           <p>One custom thumbnail made for your next upload.</p>
           <ul><li>1 custom thumbnail</li><li>YouTube-ready format</li><li>High-resolution delivery</li></ul>
-          <button class="btn order-btn" type="button" data-plan="Single Thumbnail" data-price="US $10" data-quantity="1">ORDER NOW ↗</button>
         </div>
         <div class="price-card">
           <div class="price-label">Great for getting started</div>
@@ -110,7 +118,6 @@
           <div class="price">US $27 <small><s>$30</s> · 3 thumbnails</small></div>
           <p>Get three thumbnails and save $3 compared to the individual price.</p>
           <ul><li>3 custom thumbnails</li><li>Consistent visual direction</li><li><strong>Save 10% · $3 off</strong></li></ul>
-          <button class="btn order-btn" type="button" data-plan="Starter Pack" data-price="US $27" data-quantity="3">ORDER NOW ↗</button>
         </div>
         <div class="price-card highlight">
           <div class="price-label">Best value · Save 20%</div>
@@ -118,10 +125,11 @@
           <div class="price">US $40 <small><s>$50</s> · 5 thumbnails</small></div>
           <p>More thumbnails for your channel, with a bigger bundle discount.</p>
           <ul><li>5 custom thumbnails</li><li>Consistent visual direction</li><li><strong>Save 20% · $10 off</strong></li></ul>
-          <button class="btn order-btn" type="button" data-plan="Creator Pack" data-price="US $40" data-quantity="5">ORDER NOW ↗</button>
         </div>
       </div>
-      <p class="contact-note">Clicking a plan copies your order message and opens BATATO on Discord. Just paste the message into the chat and send it.</p>
+      <div class="pricing-cta">
+        <button class="btn" type="button" id="contactPlanBtn">CONTACT PLAN ↗</button>
+      </div>
     </section>
 
     <section class="contact" id="contact"><div class="contact-card"><div><div class="kicker">Have a video in mind?</div><h2>LET'S WORK TOGETHER.</h2><p>Tell me about your channel, your video and the thumbnail you have in mind.</p><div class="contact-note">Available for commissions · Prefer Discord for fastest support.</div></div><div class="contact-actions"><div class="contact-channel primary"><span class="contact-channel-label">Official Support Channel</span><a class="btn" href="https://discord.com/users/1202403872086163568" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord ↗</a></div><div class="contact-channel alt"><span class="contact-channel-label alt">Alternative Contact</span><a class="btn secondary" href="mailto:contactbatato@gmail.com?subject=Thumbnail%20Design%20Inquiry"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>Gmail ↗</a></div></div></div></section>
@@ -145,6 +153,17 @@
     <div class="expand-wrap">
       <img id="expandImage" src="" alt="Expanded portfolio thumbnail">
       <div class="potato-overlay" aria-hidden="true">🥔</div>
+    </div>
+  </div>
+
+  <!-- Tally order form popup -->
+  <div class="tally-modal" id="tallyModal" role="dialog" aria-modal="true" aria-label="Order form">
+    <div class="tally-content">
+      <div class="tally-header">
+        <span>Order form</span>
+        <button class="tally-close" id="closeTally" type="button" aria-label="Close">×</button>
+      </div>
+      <iframe src="https://tally.so/r/Arr1xD" title="BATATO order form" loading="lazy" allow="fullscreen"></iframe>
     </div>
   </div>
 
@@ -186,7 +205,7 @@
       });
     })();
 
-    /* Lo-fi music player — starts muted/off; requires assets/batato-lofi.mp3 */
+    /* Lo-fi music player — autoplay with fallback; requires assets/batato-lofi.mp3 */
     (function () {
       const audio = document.getElementById('bgMusic');
       const btn = document.getElementById('musicToggle');
@@ -195,6 +214,7 @@
       const vol = document.getElementById('musicVolume');
       if (!audio || !btn || !vol) return;
       let playing = false;
+      let userPaused = false;
       const savedVol = localStorage.getItem('batato_vol');
       const initialVol = savedVol !== null ? parseFloat(savedVol) : 0.12;
       audio.volume = isNaN(initialVol) ? 0.12 : Math.min(1, Math.max(0, initialVol));
@@ -204,29 +224,49 @@
         iconPause.style.display = isPlaying ? 'block' : 'none';
         btn.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
       }
-      btn.addEventListener('click', async () => {
+      async function tryPlay() {
+        if (userPaused) return;
         try {
-          if (playing) {
-            audio.pause();
-            playing = false;
-          } else {
-            await audio.play();
-            playing = true;
-          }
-          setIcons(playing);
+          await audio.play();
+          playing = true;
+          setIcons(true);
+          return true;
         } catch (err) {
           playing = false;
           setIcons(false);
-          console.warn('Music playback requires user interaction and assets/batato-lofi.mp3');
+          return false;
+        }
+      }
+      btn.addEventListener('click', async () => {
+        if (playing) {
+          userPaused = true;
+          audio.pause();
+          playing = false;
+          setIcons(false);
+        } else {
+          userPaused = false;
+          await tryPlay();
         }
       });
       vol.addEventListener('input', () => {
         audio.volume = parseFloat(vol.value);
         try { localStorage.setItem('batato_vol', String(audio.volume)); } catch (_) {}
       });
-      audio.addEventListener('ended', () => { /* loop attribute handles restart */ });
       audio.addEventListener('pause', () => { if (playing) { playing = false; setIcons(false); } });
       audio.addEventListener('play', () => { playing = true; setIcons(true); });
+      // Attempt autoplay on load
+      tryPlay().then(ok => {
+        if (ok || userPaused) return;
+        const unlock = () => {
+          if (!userPaused && !playing) tryPlay();
+          document.removeEventListener('click', unlock);
+          document.removeEventListener('touchstart', unlock);
+          document.removeEventListener('keydown', unlock);
+        };
+        document.addEventListener('click', unlock, { once: true });
+        document.addEventListener('touchstart', unlock, { once: true });
+        document.addEventListener('keydown', unlock, { once: true });
+      });
     })();
 
     /* ============================================
@@ -256,23 +296,24 @@
       }
     };
 
-    /* Order buttons (unchanged) */
-    document.querySelectorAll('.order-btn').forEach(button => {
-      button.addEventListener('click', async () => {
-        const plan = button.dataset.plan;
-        const price = button.dataset.price;
-        const quantity = button.dataset.quantity;
-        const message = `Hi BATATO! I'd like to order the ${plan} (${price})\n\nQuantity: ${quantity} thumbnail(s)\n\nI'd like to discuss my video ideas and share the references for my thumbnails. Let me know how we can proceed!`;
-        window.open('https://discord.com/users/1202403872086163568', '_blank', 'noopener,noreferrer');
-        try {
-          await navigator.clipboard.writeText(message);
-          button.textContent = 'MESSAGE COPIED ✓';
-          setTimeout(() => button.textContent = 'ORDER NOW ↗', 2500);
-        } catch (error) {
-          window.prompt('Copy this order message, then paste it into Discord:', message);
-        }
-      });
-    });
+    /* Tally order popup */
+    const tallyModal = document.getElementById('tallyModal');
+    function openTally() {
+      if (!tallyModal) return;
+      tallyModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeTally() {
+      if (!tallyModal) return;
+      tallyModal.classList.remove('open');
+      if (!document.getElementById('galleryModal')?.classList.contains('open') &&
+          !document.getElementById('expandModal')?.classList.contains('open')) {
+        document.body.style.overflow = '';
+      }
+    }
+    document.getElementById('contactPlanBtn')?.addEventListener('click', openTally);
+    document.getElementById('closeTally')?.addEventListener('click', closeTally);
+    tallyModal?.addEventListener('click', e => { if (e.target === tallyModal) closeTally(); });
 
     /* Gallery & Expand logic */
     const galleryModal = document.getElementById('galleryModal');
@@ -299,7 +340,7 @@
 
     function closeGallery() {
       galleryModal.classList.remove('open');
-      document.body.style.overflow = '';
+      if (!tallyModal?.classList.contains('open')) document.body.style.overflow = '';
     }
 
     function openExpand(src, name) {
@@ -336,7 +377,8 @@
     /* ESC key */
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        if (expandModal.classList.contains('open')) closeExpand();
+        if (tallyModal && tallyModal.classList.contains('open')) closeTally();
+        else if (expandModal.classList.contains('open')) closeExpand();
         else if (galleryModal.classList.contains('open')) closeGallery();
       }
     });
