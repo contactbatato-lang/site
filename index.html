@@ -376,7 +376,8 @@
       character: {
         title: "CHARACTER-FOCUSED THUMBNAILS",
         items: [
-          { src: "assets/queen-thumbnail.png", name: "QUEEN" }
+          { src: "assets/queen-thumbnail.png", name: "QUEEN" },
+          { src: "assets/the-sift.png", name: "The Sift" }
         ]
       },
       horror: {
@@ -421,7 +422,7 @@
       data.items.forEach(item => {
         const el = document.createElement('div');
         el.className = 'gallery-item';
-        el.innerHTML = `<img src="${item.src}" alt="${item.name || 'Thumbnail'}" draggable="false">`;
+        el.innerHTML = `<img src="\( {item.src}" alt=" \){item.name || 'Thumbnail'}" draggable="false">`;
         el.addEventListener('click', () => openExpand(item.src, item.name));
         galleryGrid.appendChild(el);
       });
