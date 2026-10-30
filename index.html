@@ -24,8 +24,8 @@
     .gallery-close{border:1px solid #657da3;background:#0b1424;color:white;width:42px;height:42px;font-size:1.4rem;cursor:pointer;flex-shrink:0;transition:.2s}
     .gallery-close:hover{border-color:var(--blue2);background:#122038}
     .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-    .gallery-item{border:1px solid rgba(88,145,245,.28);background:linear-gradient(145deg,#0d1422,#070b12);cursor:pointer;transition:.25s;overflow:hidden;position:relative}
-    .gallery-item:hover{transform:translateY(-4px);border-color:rgba(111,169,255,.8);box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 18px rgba(50,118,238,.12)}
+    .gallery-item{display:block;width:100%;padding:0;text-align:left;color:inherit;font:inherit;border:1px solid rgba(88,145,245,.28);background:linear-gradient(145deg,#0d1422,#070b12);cursor:pointer;transition:.25s;overflow:hidden;position:relative}
+    .gallery-item:hover,.gallery-item:focus-visible{transform:translateY(-4px);border-color:rgba(111,169,255,.8);box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 18px rgba(50,118,238,.12);outline:none}
     .gallery-item img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#111;-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
 
     /* Expanded view modal (with potato overlay) */
@@ -306,7 +306,8 @@
       if (!audio || !btn || !vol) return;
       let playing = false;
       let userPaused = false;
-      const savedVol = localStorage.getItem('batato_vol');
+      let savedVol = null;
+      try { savedVol = localStorage.getItem('batato_vol'); } catch (_) {}
       const initialVol = savedVol !== null ? parseFloat(savedVol) : 0.12;
       audio.volume = isNaN(initialVol) ? 0.12 : Math.min(1, Math.max(0, initialVol));
       vol.value = audio.volume;
@@ -420,9 +421,23 @@
       galleryTitle.textContent = data.title;
       galleryGrid.innerHTML = '';
       data.items.forEach(item => {
-        const el = document.createElement('div');
+        const el = document.createElement('button');
+        el.type = 'button';
         el.className = 'gallery-item';
-        el.innerHTML = `<img src="\( {item.src}" alt=" \){item.name || 'Thumbnail'}" draggable="false">`;
+        el.setAttribute('aria-label', `View ${item.name || 'thumbnail'}`);
+
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.name || 'Thumbnail';
+        img.loading = 'lazy';
+        img.draggable = false;
+        img.addEventListener('error', () => {
+          img.alt = `${item.name || 'Thumbnail'} — image could not be loaded`;
+          el.disabled = true;
+          el.classList.add('image-error');
+        }, { once: true });
+
+        el.appendChild(img);
         el.addEventListener('click', () => openExpand(item.src, item.name));
         galleryGrid.appendChild(el);
       });
