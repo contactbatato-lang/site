@@ -136,6 +136,34 @@
       </div>
     </section>
 
+    <section class="section reveal-section" id="treatment" aria-label="Before and after image treatment">
+      <div class="section-head">
+        <div>
+          <div class="kicker">The finishing touch</div>
+          <h2>BEFORE &amp; AFTER<br>THE FINAL TOUCH.</h2>
+        </div>
+        <p>Lighting, color grading and finishing effects can completely change the atmosphere of an image.</p>
+      </div>
+      <div class="reveal-track" id="treatmentTrack">
+        <div class="reveal-sticky">
+          <div class="reveal-stage-wrap">
+            <div class="reveal-card" id="treatmentCard">
+              <div class="reveal-stage">
+                <img class="reveal-img sketch" src="assets/treatment-before.png" alt="Artwork before lighting and color treatment" draggable="false" width="1648" height="928">
+                <img class="reveal-img final" id="treatmentFinal" src="assets/treatment-after.png" alt="Artwork after lighting and color treatment" draggable="false" width="1648" height="928">
+                <div class="reveal-line" aria-hidden="true"><span class="reveal-handle"></span></div>
+                <div class="reveal-labels">
+                  <span class="lbl-sketch">Before</span>
+                  <span class="lbl-final" id="treatmentLblFinal">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="reveal-floor" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="work">
       <div class="section-head"><div><div class="kicker">Selected work</div><h2>BUILT TO<br>STAND OUT.</h2></div><p>A few concepts from my portfolio. Click any category to open its gallery.</p></div>
       <div class="work-grid">
@@ -234,44 +262,50 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* Scroll-driven sketch → final reveal (flat, no sticky) */
+    /* Scroll-driven before → after reveals (shared behavior for both comparisons) */
     (function () {
-      const card = document.getElementById('revealCard');
-      const finalImg = document.getElementById('revealFinal');
-      const lblFinal = document.getElementById('revealLblFinal');
-      if (!card || !finalImg) return;
+      const cards = document.querySelectorAll('.reveal-card');
+      if (!cards.length) return;
 
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        finalImg.style.clipPath = 'none';
-        finalImg.style.opacity = '0.5';
-        return;
-      }
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      let ticking = false;
+      cards.forEach(card => {
+        const finalImg = card.querySelector('.reveal-img.final');
+        const lblFinal = card.querySelector('.lbl-final');
+        if (!finalImg) return;
 
-      function update() {
-        const rect = card.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        // Progress while the card crosses the middle of the screen (short, responsive)
-        // 0 = card bottom just entering lower half, 1 = card top leaving upper half
-        const start = vh * 0.75;
-        const end = vh * 0.25;
-        const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end + rect.height * 0.35)));
-        finalImg.style.clipPath = 'inset(0 0 0 ' + ((1 - progress) * 100) + '%)';
-        if (lblFinal) lblFinal.style.opacity = String(Math.min(1, progress * 1.5));
-        ticking = false;
-      }
-
-      function onScroll() {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(update);
+        if (reducedMotion) {
+          finalImg.style.clipPath = 'none';
+          finalImg.style.opacity = '0.5';
+          if (lblFinal) lblFinal.style.opacity = '1';
+          return;
         }
-      }
 
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll, { passive: true });
-      update();
+        let ticking = false;
+
+        function update() {
+          const rect = card.getBoundingClientRect();
+          const vh = window.innerHeight || 1;
+          // Reveal the finished image as the comparison moves through the viewport.
+          const start = vh * 0.75;
+          const end = vh * 0.25;
+          const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end + rect.height * 0.35)));
+          finalImg.style.clipPath = 'inset(0 0 0 ' + ((1 - progress) * 100) + '%)';
+          if (lblFinal) lblFinal.style.opacity = String(Math.min(1, progress * 1.5));
+          ticking = false;
+        }
+
+        function onScroll() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
+      });
     })();
 
     /* Mobile menu */
