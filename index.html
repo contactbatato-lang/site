@@ -54,11 +54,34 @@
     </section>
 
     <section class="section" id="pricing">
-      <div class="section-head"><div><div class="kicker">Simple starting price</div><h2>LET'S MAKE<br>YOUR NEXT THUMBNAIL.</h2></div><p>Clear, beginner-friendly pricing while I build my client portfolio.</p></div>
+      <div class="section-head"><div><div class="kicker">Simple, transparent pricing</div><h2>CHOOSE YOUR<br>THUMBNAIL PACK.</h2></div><p>Pick the option that fits your content. Click a plan to start your order on Discord.</p></div>
       <div class="pricing">
-        <div class="price-card highlight"><div class="price-label">Starting price</div><div class="price">$10 <small>USD / thumbnail</small></div><p>Custom YouTube thumbnail design for your next upload.</p><ul><li>Made for your video concept</li><li>Designed for YouTube format</li><li>High-resolution image delivery</li></ul><a class="btn" href="#contact">Request a thumbnail ↗</a></div>
-        <div class="price-card"><div class="price-label">Custom projects</div><h3>Need more than one?</h3><p>Planning a series or uploading regularly? Get in touch and tell me what you need.</p><ul><li>Multiple-thumbnail requests</li><li>Consistent style across a series</li><li>Custom project quotes</li></ul><a class="btn secondary" href="#contact">Discuss your project</a></div>
+        <div class="price-card">
+          <div class="price-label">Single order</div>
+          <h3>SINGLE THUMBNAIL</h3>
+          <div class="price">$10 <small>USD / thumbnail</small></div>
+          <p>One custom thumbnail made for your next upload.</p>
+          <ul><li>1 custom thumbnail</li><li>YouTube-ready format</li><li>High-resolution delivery</li></ul>
+          <button class="btn order-btn" type="button" data-plan="Single Thumbnail" data-price="$10" data-quantity="1">ORDER NOW ↗</button>
+        </div>
+        <div class="price-card">
+          <div class="price-label">Great for getting started</div>
+          <h3>STARTER PACK</h3>
+          <div class="price">$27 <small><s>$30</s> · 3 thumbnails</small></div>
+          <p>Get three thumbnails and save $3 compared to the individual price.</p>
+          <ul><li>3 custom thumbnails</li><li>Consistent visual direction</li><li><strong>Save 10% · $3 off</strong></li></ul>
+          <button class="btn order-btn" type="button" data-plan="Starter Pack" data-price="$27" data-quantity="3">ORDER NOW ↗</button>
+        </div>
+        <div class="price-card highlight">
+          <div class="price-label">Best value · Save 20%</div>
+          <h3>CREATOR PACK</h3>
+          <div class="price">$40 <small><s>$50</s> · 5 thumbnails</small></div>
+          <p>More thumbnails for your channel, with a bigger bundle discount.</p>
+          <ul><li>5 custom thumbnails</li><li>Consistent visual direction</li><li><strong>Save 20% · $10 off</strong></li></ul>
+          <button class="btn order-btn" type="button" data-plan="Creator Pack" data-price="$40" data-quantity="5">ORDER NOW ↗</button>
+        </div>
       </div>
+      <p class="contact-note">Clicking a plan copies your order message and opens BATATO on Discord. Just paste the message into the chat and send it.</p>
     </section>
 
     <section class="contact" id="contact"><div class="contact-card"><div><div class="kicker">Have a video in mind?</div><h2>LET'S WORK TOGETHER.</h2><p>Tell me about your channel, your video and the thumbnail you have in mind.</p><div class="contact-note">Available for commissions · Get in touch through email or Discord.</div></div><div class="contact-actions"><a class="btn" href="mailto:contactbatato@gmail.com?subject=Thumbnail%20Design%20Inquiry">Email BATATO ↗</a><a class="btn secondary" href="https://discord.com/users/1202403872086163568" target="_blank" rel="noopener noreferrer">Discord ↗</a></div></div></section>
@@ -67,6 +90,23 @@
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Expanded thumbnail"><button id="closeModal" aria-label="Close">×</button><img id="modalImage" src="" alt="Expanded portfolio thumbnail"></div>
   <script>
     document.getElementById('year').textContent=new Date().getFullYear();
+    document.querySelectorAll('.order-btn').forEach(button => {
+      button.addEventListener('click', async () => {
+        const plan = button.dataset.plan;
+        const price = button.dataset.price;
+        const quantity = button.dataset.quantity;
+        const message = `Hi BATATO! I'd like to order the ${plan} (${price})\\n\\nQuantity: ${quantity} thumbnail(s)\\n\\nI'd like to discuss my video ideas and share the references for my thumbnails. Let me know how we can proceed!`;
+        window.open('https://discord.com/users/1202403872086163568', '_blank', 'noopener,noreferrer');
+        try {
+          await navigator.clipboard.writeText(message);
+          button.textContent = 'MESSAGE COPIED ✓';
+          setTimeout(() => button.textContent = 'ORDER NOW ↗', 2500);
+        } catch (error) {
+          window.prompt('Copy this order message, then paste it into Discord:', message);
+        }
+      });
+    });
+
     const modal=document.getElementById('modal'),modalImage=document.getElementById('modalImage');
     document.querySelectorAll('.work-card').forEach(card=>card.addEventListener('click',()=>{modalImage.src=card.dataset.image;modal.classList.add('open')}));
     function closeModal(){modal.classList.remove('open');modalImage.src=''}
