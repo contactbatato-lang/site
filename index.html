@@ -50,27 +50,30 @@
     .music-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
     .pricing-cta{display:flex;justify-content:center;margin-top:32px}
 
-    /* Scroll-driven sketch-to-final reveal */
-    .reveal-section{position:relative;padding:40px 0 20px}
-    .reveal-section .section-head{margin-bottom:28px;justify-content:center;text-align:center}
+    /* Scroll-driven sketch-to-final reveal — 3D floating card */
+    .reveal-section{position:relative;padding:48px 0 28px}
+    .reveal-section .section-head{margin-bottom:32px;justify-content:center;text-align:center}
     .reveal-section .section-head p{max-width:480px;margin:10px auto 0}
-    .reveal-track{height:520px;position:relative}
-    .reveal-sticky{position:sticky;top:90px;display:flex;justify-content:center;align-items:center;padding:10px 0 30px;perspective:1200px}
-    .reveal-card{position:relative;width:min(100%,720px);aspect-ratio:16/9;transform-style:preserve-3d;border:1px solid rgba(88,145,245,.45);background:#070b12;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 40px rgba(52,124,255,.12);overflow:hidden;will-change:transform}
-    .reveal-stage{position:absolute;inset:0;overflow:hidden}
+    .reveal-track{height:560px;position:relative}
+    .reveal-sticky{position:sticky;top:88px;display:flex;justify-content:center;align-items:center;padding:24px 0 48px;perspective:1400px;perspective-origin:50% 40%}
+    .reveal-stage-wrap{position:relative;width:min(100%,680px);transform-style:preserve-3d}
+    .reveal-card{position:relative;width:100%;aspect-ratio:16/9;transform-style:preserve-3d;border-radius:14px;border:1px solid rgba(120,175,255,.55);background:#070b12;box-shadow:0 30px 70px rgba(0,0,0,.65),0 0 50px rgba(52,124,255,.18),inset 0 1px 0 rgba(180,210,255,.15);overflow:hidden;will-change:transform;transform:rotateX(8deg) rotateY(-12deg) rotateZ(1deg)}
+    .reveal-card:after{content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(150,190,255,.2);z-index:5}
+    .reveal-floor{position:absolute;left:8%;right:8%;bottom:-28px;height:28px;background:radial-gradient(ellipse at 50% 0%,rgba(52,124,255,.35),transparent 70%);filter:blur(8px);pointer-events:none;transform:translateZ(-40px);opacity:.85}
+    .reveal-stage{position:absolute;inset:0;overflow:hidden;border-radius:13px}
     .reveal-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;pointer-events:none}
     .reveal-img.sketch{z-index:1}
     .reveal-img.final{z-index:2;clip-path:inset(0 0 0 100%)}
-    .reveal-line{position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--blue),var(--blue2),var(--blue),transparent);box-shadow:0 0 12px rgba(52,124,255,.7),0 0 24px rgba(52,124,255,.35);z-index:3;left:100%;transform:translateX(-50%);pointer-events:none}
-    .reveal-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--blue2);border:2px solid #dceaff;box-shadow:0 0 14px rgba(128,178,255,.8)}
+    .reveal-line{position:absolute;top:0;bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(180deg,rgba(52,124,255,0),#347cff 15%,#b8d4ff 50%,#347cff 85%,rgba(52,124,255,0));box-shadow:0 0 10px #347cff,0 0 22px rgba(52,124,255,.7),0 0 40px rgba(52,124,255,.35);z-index:3;left:100%;pointer-events:none}
+    .reveal-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e8f2ff,#80b2ff 45%,#347cff);border:2px solid rgba(220,234,255,.9);box-shadow:0 0 16px rgba(128,178,255,.95),0 0 28px rgba(52,124,255,.5)}
     .reveal-labels{position:absolute;inset:0;z-index:4;pointer-events:none;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue2)}
-    .reveal-labels span{position:absolute;top:12px;padding:5px 10px;background:rgba(5,10,19,.75);border:1px solid rgba(88,145,245,.3)}
+    .reveal-labels span{position:absolute;top:12px;padding:5px 10px;background:rgba(5,10,19,.8);border:1px solid rgba(88,145,245,.35);border-radius:4px}
     .reveal-labels .lbl-sketch{left:12px}
     .reveal-labels .lbl-final{right:12px;opacity:0}
-    .reveal-card.floating{animation:revealFloat 6s ease-in-out infinite}
-    @keyframes revealFloat{0%,100%{transform:rotateX(2deg) rotateY(-3deg) translateY(0)}50%{transform:rotateX(-1deg) rotateY(3deg) translateY(-8px)}}
-    @media(max-width:760px){.reveal-track{height:420px}.reveal-sticky{top:70px}}
-    @media(prefers-reduced-motion:reduce){.reveal-track{height:auto}.reveal-sticky{position:relative;top:auto}.reveal-img.final{clip-path:none!important;opacity:.5}.reveal-line{display:none}.reveal-card{transform:none!important;animation:none!important}.reveal-labels .lbl-final{opacity:1}}
+    .reveal-card.floating{animation:revealFloat 5.5s ease-in-out infinite}
+    @keyframes revealFloat{0%,100%{transform:rotateX(6deg) rotateY(-10deg) translateY(0)}50%{transform:rotateX(3deg) rotateY(-6deg) translateY(-10px)}}
+    @media(max-width:760px){.reveal-track{height:440px}.reveal-sticky{top:72px;padding:16px 0 36px}.reveal-card{border-radius:10px;transform:rotateX(4deg) rotateY(-6deg)}.reveal-floor{bottom:-18px;height:18px}}
+    @media(prefers-reduced-motion:reduce){.reveal-track{height:auto}.reveal-sticky{position:relative;top:auto}.reveal-img.final{clip-path:none!important;opacity:.5}.reveal-line{display:none}.reveal-card{transform:none!important;animation:none!important}.reveal-floor{display:none}.reveal-labels .lbl-final{opacity:1}}
 
     .tally-modal{position:fixed;inset:0;background:rgba(2,5,10,.94);display:none;align-items:center;justify-content:center;padding:20px;z-index:60;backdrop-filter:blur(8px)}
     .tally-modal.open{display:flex}
@@ -118,16 +121,19 @@
       </div>
       <div class="reveal-track" id="revealTrack">
         <div class="reveal-sticky">
-          <div class="reveal-card" id="revealCard">
-            <div class="reveal-stage">
-              <img class="reveal-img sketch" src="assets/thumbnail-sketch.png" alt="Rough thumbnail sketch" draggable="false" width="1280" height="720">
-              <img class="reveal-img final" id="revealFinal" src="assets/thumbnail-final.png" alt="Finished thumbnail artwork" draggable="false" width="1280" height="720">
-              <div class="reveal-line" id="revealLine"><span class="reveal-handle" aria-hidden="true"></span></div>
-              <div class="reveal-labels">
-                <span class="lbl-sketch">Sketch</span>
-                <span class="lbl-final" id="revealLblFinal">Final</span>
+          <div class="reveal-stage-wrap">
+            <div class="reveal-card" id="revealCard">
+              <div class="reveal-stage">
+                <img class="reveal-img sketch" src="assets/thumbnail-sketch.png" alt="Rough thumbnail sketch" draggable="false" width="1280" height="720">
+                <img class="reveal-img final" id="revealFinal" src="assets/thumbnail-final.png" alt="Finished thumbnail artwork" draggable="false" width="1280" height="720">
+                <div class="reveal-line" id="revealLine"><span class="reveal-handle" aria-hidden="true"></span></div>
+                <div class="reveal-labels">
+                  <span class="lbl-sketch">Sketch</span>
+                  <span class="lbl-final" id="revealLblFinal">Final</span>
+                </div>
               </div>
             </div>
+            <div class="reveal-floor" aria-hidden="true"></div>
           </div>
         </div>
       </div>
@@ -231,7 +237,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* Scroll-driven sketch → final reveal */
+    /* Scroll-driven sketch → final reveal (line locked to mask) */
     (function () {
       const track = document.getElementById('revealTrack');
       const card = document.getElementById('revealCard');
@@ -257,34 +263,32 @@
 
       function update() {
         const rect = track.getBoundingClientRect();
-        const viewH = window.innerHeight || 1;
-        // Progress over ~track height while sticky is active
-        const start = viewH * 0.55;
-        const end = rect.height - viewH * 0.15;
-        const scrolled = start - rect.top;
-        const range = Math.max(end - start + start, 1);
-        progress = Math.min(1, Math.max(0, scrolled / (rect.height * 0.85)));
+        // Map sticky travel to 0→1 (short distance so it finishes quickly)
+        progress = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height - window.innerHeight * 0.35, 1)));
 
-        // Reveal from right to left: clip left edge moves from 100% → 0%
-        const pct = (1 - progress) * 100;
-        finalImg.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+        // Same value drives mask AND line so they never desync
+        // Final reveals from the RIGHT: clip left edge goes 100% → 0%
+        const leftClip = (1 - progress) * 100;
+        finalImg.style.clipPath = 'inset(0 0 0 ' + leftClip + '%)';
+        // Line sits exactly on the reveal edge (progress 0 = right, 1 = left)
         line.style.left = (progress * 100) + '%';
-        if (lblFinal) lblFinal.style.opacity = String(Math.min(1, progress * 1.4));
+        if (lblFinal) lblFinal.style.opacity = String(Math.min(1, progress * 1.5));
 
-        // 3D tilt: base scroll tilt + optional mouse
-        let rx = 4 - progress * 6;
-        let ry = -6 + progress * 10;
+        // 3D card: starts tilted (like the mockup), eases toward frontal as reveal completes
+        let rx = 8 - progress * 5;
+        let ry = -12 + progress * 8;
+        let rz = 1 - progress * 0.5;
         if (!isTouch && isHover) {
-          rx += (mouseY - 0.5) * 8;
-          ry += (mouseX - 0.5) * 12;
+          rx += (mouseY - 0.5) * 6;
+          ry += (mouseX - 0.5) * 10;
         }
-        const lift = progress * 6;
-        if (progress >= 0.98) {
+        const lift = -4 - progress * 8;
+        if (progress >= 0.97) {
           card.classList.add('floating');
           card.style.transform = '';
         } else {
           card.classList.remove('floating');
-          card.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(' + (-lift) + 'px)';
+          card.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) rotateZ(' + rz.toFixed(2) + 'deg) translateY(' + lift.toFixed(1) + 'px)';
         }
         ticking = false;
       }
@@ -304,12 +308,12 @@
         card.addEventListener('mouseenter', () => { isHover = true; });
         card.addEventListener('mouseleave', () => {
           isHover = false;
-          if (progress < 0.98) onScroll();
+          if (progress < 0.97) onScroll();
         });
         card.addEventListener('mousemove', e => {
           const r = card.getBoundingClientRect();
-          mouseX = (e.clientX - r.left) / r.width;
-          mouseY = (e.clientY - r.top) / r.height;
+          mouseX = (e.clientX - r.left) / Math.max(r.width, 1);
+          mouseY = (e.clientY - r.top) / Math.max(r.height, 1);
           if (!ticking) {
             ticking = true;
             requestAnimationFrame(update);
