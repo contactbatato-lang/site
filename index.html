@@ -50,12 +50,12 @@
     .music-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
     .pricing-cta{display:flex;justify-content:center;margin-top:32px}
 
-    /* Scroll-driven sketch-to-final reveal — flat card */
-    .reveal-section{position:relative;padding:36px 0 16px}
+    /* Scroll-driven sketch-to-final reveal — flat, no sticky (stable on mobile) */
+    .reveal-section{position:relative;padding:36px 0 48px}
     .reveal-section .section-head{margin-bottom:24px;justify-content:center;text-align:center}
     .reveal-section .section-head p{max-width:480px;margin:10px auto 0}
-    .reveal-track{height:320px;position:relative}
-    .reveal-sticky{position:sticky;top:90px;display:flex;justify-content:center;align-items:center;padding:8px 0 16px}
+    .reveal-track{position:relative;display:flex;justify-content:center;padding:4px 0 8px}
+    .reveal-sticky{display:contents}
     .reveal-stage-wrap{position:relative;width:min(100%,680px)}
     .reveal-card{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(88,145,245,.4);background:#070b12;box-shadow:0 16px 40px rgba(0,0,0,.45),0 0 28px rgba(52,124,255,.1);overflow:hidden}
     .reveal-floor{display:none}
@@ -69,8 +69,8 @@
     .reveal-labels span{position:absolute;top:12px;padding:5px 10px;background:rgba(5,10,19,.8);border:1px solid rgba(88,145,245,.35);border-radius:4px}
     .reveal-labels .lbl-sketch{left:12px}
     .reveal-labels .lbl-final{right:12px;opacity:0}
-    @media(max-width:760px){.reveal-track{height:280px}.reveal-sticky{top:72px;padding:6px 0 12px}.reveal-card{border-radius:8px}}
-    @media(prefers-reduced-motion:reduce){.reveal-track{height:auto}.reveal-sticky{position:relative;top:auto}.reveal-img.final{clip-path:none!important;opacity:.5}.reveal-labels .lbl-final{opacity:1}}
+    @media(max-width:760px){.reveal-section{padding:28px 0 36px}.reveal-card{border-radius:8px}}
+    @media(prefers-reduced-motion:reduce){.reveal-img.final{clip-path:none!important;opacity:.5}.reveal-labels .lbl-final{opacity:1}}
 
     .tally-modal{position:fixed;inset:0;background:rgba(2,5,10,.94);display:none;align-items:center;justify-content:center;padding:20px;z-index:60;backdrop-filter:blur(8px)}
     .tally-modal.open{display:flex}
@@ -234,12 +234,12 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* Scroll-driven sketch → final reveal (flat card, short travel) */
+    /* Scroll-driven sketch → final reveal (flat, no sticky) */
     (function () {
-      const track = document.getElementById('revealTrack');
+      const card = document.getElementById('revealCard');
       const finalImg = document.getElementById('revealFinal');
       const lblFinal = document.getElementById('revealLblFinal');
-      if (!track || !finalImg) return;
+      if (!card || !finalImg) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         finalImg.style.clipPath = 'none';
@@ -250,11 +250,14 @@
       let ticking = false;
 
       function update() {
-        const rect = track.getBoundingClientRect();
-        // Short range → animation finishes quickly (~280–320px of scroll)
-        const progress = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.9, 1)));
-        const leftClip = (1 - progress) * 100;
-        finalImg.style.clipPath = 'inset(0 0 0 ' + leftClip + '%)';
+        const rect = card.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        // Progress while the card crosses the middle of the screen (short, responsive)
+        // 0 = card bottom just entering lower half, 1 = card top leaving upper half
+        const start = vh * 0.75;
+        const end = vh * 0.25;
+        const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end + rect.height * 0.35)));
+        finalImg.style.clipPath = 'inset(0 0 0 ' + ((1 - progress) * 100) + '%)';
         if (lblFinal) lblFinal.style.opacity = String(Math.min(1, progress * 1.5));
         ticking = false;
       }
